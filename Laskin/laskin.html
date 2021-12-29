@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>calculator</title>
+    <style>
+      .content {
+        width: 500px;
+        margin: auto;
+        text-align: center;
+      }
+      .calculator {
+        border-color: #8077f8;
+        border-style: outset;
+        border-width: 15px;
+        width: 250px;
+        height: 300px;
+        margin: auto;
+        text-align: center;
+        background-color: #b7aafd;
+        border-radius: 50%;
+      }
+
+      input[type="button"] {
+        display: inline-block;
+        margin: 2px;
+		margin-bottom: 10px;
+        padding: 5px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        outline: none;
+        color: #fff;
+        background-color: #b17df5;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 5px rgb(96, 35, 209);
+      }
+
+      input[type="button"]:hover {
+        background-color: #8313c4;
+      }
+
+      input[type="button"]:active {
+        background-color: #6954c9;
+        box-shadow: 0 5px rgb(107, 62, 179);
+        transform: translateY(4px);
+      }
+    </style>
+    <script type="text/javascript">
+      // Määritellään merkkijonomuuttuja ja alustetaan se tyhjällä merkkijonolla:
+      var calculation = "";
+
+      // Jokainen napin klikkaus kutsuu Button-funktiota:
+      function Button(choice) {
+        // Jos on klikattu C-painiketta, tulostetaan näyttöön 0
+        // ja tyhjennetään calculation-muuttujan sisältö:
+        if (choice == "c") {
+          document.calculator.screen.value = "0";
+          calculation = "";
+        }
+
+        // Jos on klikattu =-painiketta, muunnetaan merkkijono matemaattiseen
+        // muotoon, lasketaan lauseke ja tulostetaan se tekstikenttään:
+        else if (choice == "=")
+          document.calculator.screen.value = eval(calculation);
+        // Jos on klikattu jotain muuta painiketta, lisätään parametrina saatu
+        // merkki tai numero calculationmuuttujan perään:
+        else {
+          calculation = calculation + choice;
+
+          // Jos ensimmäinen merkki ei ole numero, annetaan virheilmoitus.
+          // Muuten tulostetaan calculation merkki jonona tekstikenttään:
+          if (isNaN(calculation.charAt(0)))
+            document.calculator.screen.value = "Error!";
+          else document.calculator.screen.value = calculation;
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="content">
+      <h1>JavaScript-calculator</h1>
+      <!-- calculator on muodostettu tavallisista lomake-elementeistä. Jokainen painike
+kutsuu samaa funktiota, mutta vie sille eri parametrin. -->
+      <div class="calculator">
+        <br /><br />
+        <form name="calculator">
+          <input type="text" size="15" name="screen" />
+          <br />
+		  <br>
+          <input type="button" value=" 7 " onclick="Button(7)" />
+          <input type="button" value=" 8 " onclick="Button(8)" />
+          <input type="button" value=" 9 " onclick="Button(9)" />
+          <input type="button" value="  / " onclick="Button('/')" />
+          <br />
+          <input type="button" value=" 4 " onclick="Button(4)" />
+          <input type="button" value=" 5 " onclick="Button(5)" />
+          <input type="button" value=" 6 " onclick="Button(6)" />
+          <input type="button" value="  * " onclick="Button('*')" />
+          <br />
+          <input type="button" value=" 1 " onclick="Button(1)" />
+          <input type="button" value=" 2 " onclick="Button(2)" />
+          <input type="button" value=" 3 " onclick="Button(3)" />
+          <input type="button" value="  - " onclick="Button('-')" />
+          <br />
+          <input type="button" value=" . " onclick="Button('.')" />
+          <input type="button" value=" 0 " onclick="Button(0)" />
+          <input type="button" value=" C " onclick="Button('c')" />
+          <input type="button" value=" + " onclick="Button('+')" />
+          <br />
+          <input type="button" value=" = " onclick="Button('=')" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
